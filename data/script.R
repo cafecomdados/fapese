@@ -5,7 +5,7 @@ url <- "http://estagio.fapese.org.br/manager/transparencia/financeiro/projeto/83
 
 pagina <- read_html(url)
 
-tabela_bolsas <- pagina %>%
+tabela_geral <- pagina %>%
   html_nodes("table.conteudo") %>%
   .[[1]] %>%
   html_table(fill = TRUE) %>%
@@ -14,4 +14,16 @@ tabela_bolsas <- pagina %>%
   slice(-1) %>%
   select(-Documento)
 
+
+tabela_bolsas <- tabela_geral |> 
+  filter(Rubrica == 'Bolsa Acadêmica')
+
+ultimos_lancamentos <- tabela_geral |>
+  mutate(Data2 = as.Date(Data, format = "%d/%m/%Y")) |> 
+  filter(Data2 == max(Data2)) |> 
+  select(-Data2)
+
+
+write.csv(tabela_geral, file = "data/tabela_bolsas.csv", row.names = FALSE)
 write.csv(tabela_bolsas, file = "data/tabela_bolsas.csv", row.names = FALSE)
+write.csv(ultimos_lancamentos, file = "data/ultimos_lancamentos.csv", row.names = FALSE)
