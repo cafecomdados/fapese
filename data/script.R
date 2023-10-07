@@ -14,4 +14,4 @@ tabela_bolsas <- pagina %>%
   slice(-1) %>%
   select(-Documento)
 
-write.csv(tabela_bolsas, file = "tabela_bolsas.csv", row.names = FALSE)
+write.csv(tabela_bolsas, file = "data/tabela_bolsas.csv", row.names = FALSE)
