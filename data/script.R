@@ -24,6 +24,6 @@ ultimos_lancamentos <- tabela_geral |>
   select(-Data2)
 
 
-write.csv(tabela_geral, file = "data/tabela_bolsas.csv", row.names = FALSE)
+write.csv(tabela_geral, file = "data/tabela_geral.csv", row.names = FALSE)
 write.csv(tabela_bolsas, file = "data/tabela_bolsas.csv", row.names = FALSE)
 write.csv(ultimos_lancamentos, file = "data/ultimos_lancamentos.csv", row.names = FALSE)
